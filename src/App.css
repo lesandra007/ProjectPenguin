@@ -1,0 +1,55 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+.Sidebar{
+  height: 100%;
+  width: 230px;
+  background-color: #040918;
+}
+
+.SidebarList{
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.SidebarList .tab{
+  width: 100%;
+  height: 50px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.SidebarList .tab:hover{
+  cursor: pointer;
+  color: #F39237;
+}
+
+.SidebarList #active{
+  color: #F39237;
+}
+
+.tab #icon{
+  flex: 40%;
+  display: grid;
+  place-items: center;
+}
+
+.tab #title{
+  flex:60%;
+  font-size: large;
+}
+
+.PageMenuAndContent{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #324376;
+}
