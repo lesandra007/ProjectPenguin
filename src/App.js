@@ -6,13 +6,16 @@ import Goals from "./pages/Goals";
 import Questions from "./pages/Questions";
 import Hackings from "./pages/Hackings";
 import Shop from "./pages/Shop";
+import Login from "./pages/Login";
 
 
 export default function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={ <Home/> } />
+        <Route index element={ <Login/> } />
+        {/* <Route index element={ <Home/> } /> */}
+        <Route path="/home" element={ <Home/> } />
         <Route path="/goals" element={ <Goals/> } />
         <Route path="/questions" element={ <Questions/> } />
         <Route path="/hackings" element={ <Hackings/> } />
