@@ -4,12 +4,13 @@ import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import CodeIcon from '@mui/icons-material/Code';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 export const SidebarButtons = [
     {
         title: "Home",
         icon: <HomeIcon />,
-        link: "/"
+        link: "/home"
     },
     {
         title: "Goals",
@@ -30,5 +31,10 @@ export const SidebarButtons = [
         title: "Shop",
         icon: <ShoppingCartIcon />,
         link: "/shop"
-    }
+    },
+    {
+        title: "Log out",
+        icon: <ExitToAppIcon />,
+        link: "/"
+    },
 ]
