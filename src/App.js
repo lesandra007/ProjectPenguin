@@ -13,7 +13,7 @@ export default function App() {
   return (
     <div className="App">
       <Routes>
-        <Route index element={ <Login/> } />
+        {/* <Route index element={ <Login/> } /> */}
         {/* <Route index element={ <Home/> } /> */}
         <Route path="/" element={ <Login/> } />
         <Route path="/home" element={ <Home/> } />

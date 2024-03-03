@@ -5,7 +5,7 @@
 
 .Sidebar{
   height: 100%;
-  width: 230px;
+  width: 200px;
   background-color: #040918;
 }
 
@@ -68,7 +68,7 @@
   color: white;
 }
 
-.logoContainer img{
+.logoContainer img{ 
   align-items: center;
   position: absolute;
   top: 10%;
@@ -105,7 +105,6 @@ input[type=text] {
   width: 90%;
 }
 
-
 .buttonContainer {
   display: flex;
   justify-content: center;
@@ -119,4 +118,11 @@ input[type=text] {
   color: #fff; 
   border: none; 
   cursor: pointer; 
+}
+
+.Icon img{
+  width: 200px; 
+  height: 200px;
+  height: auto; 
+  padding: 1%;
 }
