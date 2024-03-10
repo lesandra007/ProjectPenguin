@@ -8,9 +8,11 @@ export default function Questions() {
     <div className="PageMenuAndContent">
         <Sidebar/>
         {/* <h1>Questions</h1> */}
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
-                <Title title='Questions'/>
-            </div>
+        <div className="PageContent">
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+              <Title title='Questions'/>
+          </div>
+        </div>
     </div>
   );
 }
