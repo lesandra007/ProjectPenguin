@@ -31,10 +31,11 @@ export const SidebarButtons = [
         title: "Shop",
         icon: <ShoppingCartIcon />,
         link: "/shop"
-    },
-    {
-        title: "Log out",
-        icon: <ExitToAppIcon />,
-        link: "/"
-    },
+    }
 ]
+
+export const LogoutButton = {
+    title: "Log out",
+    icon: <ExitToAppIcon />,
+    link: "/"
+}

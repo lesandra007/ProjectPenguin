@@ -6,8 +6,10 @@ export default function Shop() {
   return (
     <div className="PageMenuAndContent">
         <Sidebar/>
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
-          <Title title='Shop'/>
+        <div className="PageContent">
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+            <Title title='Shop'/>
+          </div>
         </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from 'react'
 import "../App.css";
 import {SidebarButtons} from "./SidebarButtons";
+import {LogoutButton} from "./SidebarButtons";
 import penguinlogo from "../penguinlogo.png";
 
 export default function Sidebar() {
@@ -8,7 +9,8 @@ export default function Sidebar() {
         <div className="Sidebar"> 
             <div className="Icon">
                 <img src={penguinlogo} alt="logo"/>
-                <h3 style={{ textAlign: 'center', color: 'white', fontSize: '15px', margin: '0' }}>Level 1</h3>
+                <h2 style={{ textAlign: 'center', color: 'white', margin: '0px' }}>Pengy</h2>
+                <h3 style={{ textAlign: 'center', color: 'silver', fontSize: '15px', margin: '8px' }}>Level 1</h3>
             </div>
             <ul className="SidebarList">
             
@@ -26,6 +28,15 @@ export default function Sidebar() {
                     );
                 })}
             </ul>
+            <ui className="SidebarList">
+                    <li 
+                        className="tab" 
+                        onClick={()=>{window.location.pathname = LogoutButton.link}}
+                        id={window.location.pathname === LogoutButton.link ? "active" : ""}>
+                        <div id="icon">{LogoutButton.icon}</div>
+                        <div id="title">{LogoutButton.title}</div>
+                    </li>
+                </ui>
         </div>
     )
 }
