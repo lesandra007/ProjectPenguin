@@ -136,5 +136,18 @@ input[type=text] {
   width: 200px; 
   height: 200px;
   height: auto; 
-  /* padding: 1%; */
+}
+
+@media (max-width: 1200px) {
+  .Sidebar{
+    width: 100px;
+  }
+
+  .Icon img{
+    display: none;
+  }
+
+  .tab #title{
+    display: none;
+  }
 }
