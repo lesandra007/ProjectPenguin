@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Title({ title }) {
     return (
-        <div style={{margin: '10px 0px', width: '100%', height: '15vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{width: '100%', height: '15vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <div style={{ fontSize: '10vh', color: '#F39237', fontWeight: 'bold', fontFamily: 'Andale Mono, monospace', fontVariant: 'small-caps' }}>
                 {title}
             </div>
