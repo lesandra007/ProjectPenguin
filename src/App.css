@@ -228,4 +228,35 @@ input[type=text] {
     flex-direction: column;
     gap: 10px;
   }
+
+  .QuestionItems{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .question{
+    width: 95%;
+  }
+}
+
+.QuestionItems{
+  display: flex;
+  position: absolute;
+  left: 300px;
+  top: 120px;
+  gap: 120px;
+  margin: 15px auto;
+}
+
+.question{
+  background-color: var(--darkest-blue);
+  color: white;
+  width: 350px;
+  height: 350px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px 20px;
 }
