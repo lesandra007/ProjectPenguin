@@ -35,8 +35,14 @@ export default function Goals() {
 
           {/* Tasks and Accomplishments */}
           <div className="TasksAndAccomplishments">
-            <div className='TasksSection'>tasksksksks</div>
-            <div className='AccomplishmentsSection'>acomplishsments:D</div>
+            <div className='TasksSection'>
+              <h2>My Tasks</h2>
+              <hr></hr>
+            </div>
+            <div className='AccomplishmentsSection'>
+              <h2>Accomplishments</h2>
+              <hr></hr>
+            </div>
           </div>
         </div>
     </div>

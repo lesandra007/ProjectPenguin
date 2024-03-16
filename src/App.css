@@ -173,21 +173,29 @@ input[type=text] {
 .TasksAndAccomplishments{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
 }
 
 .TasksSection{
   background-color: var(--darker-blue);
   color: silver;
-  width: 100%;
+  width: 450px;
   height: 200px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 0px 15px;
 }
 
 .AccomplishmentsSection{
   background-color: var(--darker-blue);
   color: silver;
-  width: 100%;
+  width: 450px;
   height: 200px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 0px 15px;
 }
 
 /* Website Responsiveness */
@@ -227,6 +235,14 @@ input[type=text] {
   .TasksAndAccomplishments{
     flex-direction: column;
     gap: 10px;
+  }
+
+  .TasksSection{
+    width: 95%;
+  }
+
+  .AccomplishmentsSection{
+    width: 95%;
   }
 
   .QuestionItems{
