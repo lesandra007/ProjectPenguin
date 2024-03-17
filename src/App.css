@@ -280,3 +280,15 @@ input[type=text] {
   box-sizing: border-box;
   padding: 10px 20px;
 }
+
+.submitButton {
+  background-color: greenyellow;
+  border: none;
+  padding: 10px 20px;
+  /* text-align: center; */
+  margin: 10px auto;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+}
