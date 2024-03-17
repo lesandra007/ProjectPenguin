@@ -16,7 +16,7 @@ export default function Login() {
     return (
         <div className={'outerContainer'}>
             <div className={'logoContainer'}>
-                <img src={penguinlogo} alt="logo"/>
+                <img src={penguinlogo} alt="logo" className="logo"/>
             </div>
             <div className={'titleContainer'}>
                 <div>Log In</div>
@@ -35,6 +35,7 @@ export default function Login() {
                     placeholder={"Enter password here..."}
                     onChange={(input) => setPassword(input.target.value)}
                     type="text"
+                    classname="inputBox"
                 />
             </div>
             <div className={'buttonContainer'}>
