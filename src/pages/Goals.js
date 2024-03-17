@@ -2,6 +2,7 @@ import React from 'react'
 import "../App.css";
 import Sidebar from '../components/Sidebar';
 import Title from '../components/Title';
+import ProgressBar from '../components/ProgressBar';
 
 export default function Goals() {
   return (
@@ -20,16 +21,19 @@ export default function Goals() {
               <div className="goal">
                 <h2>Goal1</h2>
                 <p>description...</p>
+                <ProgressBar percentCompleted={50}/>
               </div>
               {/* Goal 2 */}
               <div className="goal">
                 <h2>Goal2</h2>
                 <p>description...</p>
+                <ProgressBar percentCompleted={20}/>
               </div>
               {/* Goal 3 */}
               <div className="goal">
                 <h2>Goal3</h2>
                 <p>description...</p>
+                <ProgressBar percentCompleted={75}/>
               </div>
           </div>
 

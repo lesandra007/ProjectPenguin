@@ -153,6 +153,51 @@ input[type=text] {
   height: auto; 
 }
 
+/* Progress bar */
+.progressContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.progressText{
+  width: 30px;
+  margin-left: 15px;
+
+  display: flex;
+  flex-direction: row;
+
+  color: silver;
+
+}
+
+.progressBar{
+  width: 100%;
+  height: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: stretch;
+
+  border-radius: 60px;
+  background-color: var(--light-blue);
+
+  overflow: hidden;
+}
+
+.progressFill{
+  width: 0%;
+
+  background: linear-gradient(
+    180deg,
+    var(--light-orange) 0%,
+    var(--dark-orange) 35%,
+    #f1821a 100%
+  );
+}
+
 /* Goals page */
 .GoalItems{
   width: 100%;
@@ -171,7 +216,7 @@ input[type=text] {
   width: 350px;
   border-radius: 10px;
   box-sizing: border-box;
-  padding: 0px 15px;
+  padding: 0px 15px 15px;
 }
 
 .TasksAndAccomplishments{
@@ -248,6 +293,8 @@ input[type=text] {
   .AccomplishmentsSection{
     width: 95%;
   }
+
+  /* Questions */
 
   .QuestionItems{
     display: flex;
