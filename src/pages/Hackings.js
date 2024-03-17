@@ -39,19 +39,19 @@ const runCode = async () => {
             <section style={{float: 'left', width: '45%', color: '#FFFF'}}>
               <Box width={500}>
             <h2>Objective</h2>
-            <p>In this challenge we're going to use loops to print unique numbers.</p>
+            <p>Description...</p>
             <h2>Task</h2>
-            <p>Given an integer N,  print the even numbers within the range of 1 to N.</p>
+            <p>Description...</p>
             <h2>Input Format</h2>
-            <p>A single integer, N.</p>
+            <p>Description...</p>
             <h2>Output Format</h2>
-            <p>Prints the even number in one line, with a space separating each even number</p>
+            <p>Description...</p>
             </Box>
             <Box style={{width:'500', color:'#FFFF'}}>
               <h2>Sample Input</h2>
-              <i>N = 10</i>
+              <i>Description...</i>
               <h2>Sample Output</h2>
-              <i>2  4  6  8  10</i>
+              <i>Description...</i>
 
             </Box>
           </section>
