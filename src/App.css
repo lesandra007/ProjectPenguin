@@ -207,13 +207,13 @@ input[type=text] {
   justify-content: space-evenly;
   align-items: center;
   gap: 10px;
-  margin: 15px auto;
+  margin: 15px auto 5px;
 }
 
 .goal{
   background-color: var(--darker-blue);
   color: silver;
-  width: 350px;
+  width: 520px;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 0px 15px 15px;
@@ -223,28 +223,47 @@ input[type=text] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: space-evenly;
   gap: 10px;
+  margin-bottom: 15px;
 }
 
 .TasksSection{
-  background-color: var(--darker-blue);
-  color: silver;
-  width: 450px;
-  height: 200px;
+  color: whitesmoke;
+  width: 520px;
+  height: auto;
+  box-sizing: border-box;
+  padding: 0px 15px;
+}
+
+.tasksList{
+  width: 100%;
+  height: auto;
+  /* background-color: var(--light-orange); */
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.AccomplishmentsSection{
+  /* background-color: var(--darkest-blue); */
+  color: whitesmoke;
+  width: 520px;
+  height: auto;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 0px 15px;
 }
 
-.AccomplishmentsSection{
-  background-color: var(--darker-blue);
-  color: silver;
-  width: 450px;
-  height: 200px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 0px 15px;
+.badgesList{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 9px;
+  /* background-color: #f1821a; */
 }
 
 /* Website Responsiveness */
@@ -283,7 +302,7 @@ input[type=text] {
 
   .TasksAndAccomplishments{
     flex-direction: column;
-    gap: 10px;
+    gap:20px;
   }
 
   .TasksSection{
