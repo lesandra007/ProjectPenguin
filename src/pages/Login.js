@@ -19,12 +19,12 @@ export default function Login() {
                 <img src={penguinlogo} alt="logo" className="logo"/>
             </div>
             <div className={'titleContainer'}>
-                <div>Log In</div>
+                <div>Project Penguin</div>
             </div>
             <div classname={'inputContainer'} >
                 <input 
                     value={email}
-                    placeholder={"Enter email address here..."}
+                    placeholder={"Email"}
                     onChange={(input) => setEmail(input.target.value)}
                     type="text"
                 />
@@ -32,7 +32,7 @@ export default function Login() {
             <div classname={'inputContainer'} >
                 <input
                     value={password}
-                    placeholder={"Enter password here..."}
+                    placeholder={"Password"}
                     onChange={(input) => setPassword(input.target.value)}
                     type="text"
                     classname="inputBox"
