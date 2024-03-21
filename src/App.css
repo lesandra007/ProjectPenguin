@@ -219,7 +219,7 @@ input[type=text] {
 .goal{
   background-color: var(--darker-blue);
   color: silver;
-  width: 520px;
+  width: 500px;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 0px 15px 15px;
