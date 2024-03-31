@@ -255,6 +255,48 @@ input[type=text] {
   padding: 0px 15px;
 }
 
+.addTaskContainer{
+  /* background-color: #47b1e2; */
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.addTaskContainer .taskIcon{
+  /* background-color: var(--darker-blue); */
+  margin: 5px;
+  box-sizing: border-box;
+  padding: 10x;
+}
+
+.addTaskContainer input.addTaskInput{
+  border: 1px solid var(--darker-blue);
+  background-color: var(--light-blue);
+  color: rgb(217, 222, 227);
+  width: 100%;
+  border-radius: 5px;
+  margin: 5px 0px;
+}
+
+.addTaskContainer input::-webkit-input-placeholder{
+  color: rgb(217, 222, 227);
+}
+
+
+.addTaskContainer button{
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 5px 0px;
+  background-color: orange;
+}
+
+.addTaskContainer button:hover{
+  background-color: var(--dark-orange);
+}
+
 /* .tasksList{
   width: 100%;
   height: auto;

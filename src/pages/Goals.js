@@ -17,6 +17,8 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
+import ChecklistIcon from '@mui/icons-material/Checklist';
+
 
 export default function Goals() {
   // Tasks array
@@ -25,6 +27,29 @@ export default function Goals() {
     {id: 2, title: "probably a very important task 2"},
     {id: 3, title: "probably a very important task 3"}];
   const [tasks, setTasks] = useState(tasksArray);
+
+  // ADD TASK TO TASKS LIST
+
+  //input field
+  const [input, setInput] = useState("");
+  const handleSubmit = () => {
+    //if no input, do nothing
+    if (!input) return;
+
+    addTask(input);
+    
+    //clear input field
+    setInput("");
+  };
+
+  //add a task to tasks array
+  const addTask = title => {
+    setTasks(tasks => [...tasks, {id: tasks.length + 1, title}]);
+  };
+
+
+
+  // DROP AND DRAGGABLE TASKS LISTS
 
   //helper function: finds id of given task in tasks array; if task is equal to the task given, return the id
   const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
@@ -87,6 +112,18 @@ export default function Goals() {
             <div className='TasksSection'>
               <h2>Today's Tasks</h2>
               <hr></hr>
+              {/* Add task */}
+              <div className='addTaskContainer'>
+                <div className='taskIcon'><ChecklistIcon/></div>
+                <input 
+                  type="text" 
+                  placeholder='Your Task'
+                  className="addTaskInput" 
+                  value = {input} 
+                  onChange={e => setInput(e.target.value)}/>
+                <button onClick={handleSubmit}>Add</button>
+              </div>
+
               {/* Drag and dropable task section */}
               <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
                 <TaskDraggable tasks={tasks}/>
