@@ -255,15 +255,32 @@ input[type=text] {
   padding: 0px 15px;
 }
 
-.tasksList{
+/* .tasksList{
   width: 100%;
   height: auto;
-  /* background-color: var(--light-orange); */
+  background-color: var(--light-orange);
   border-radius: 10px;
 
   display: flex;
   flex-direction: column;
   gap: 8px;
+} */
+
+.task{
+  background-color: var(--darker-blue);
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 8px 0px;
+  touch-action: none;
 }
 
 .AccomplishmentsSection{

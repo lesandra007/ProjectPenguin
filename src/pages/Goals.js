@@ -1,12 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState }  from 'react'
 import "../App.css";
 import Sidebar from '../components/Sidebar';
 import Title from '../components/Title';
 import ProgressBar from '../components/ProgressBar';
-import Task from '../components/Task';
+import { TaskDraggable } from "../components/TaskDraggable";
+
 import Badge from '../components/Badge';
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  TouchSensor,
+  closestCorners,
+} from "@dnd-kit/core";
+import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+
 
 export default function Goals() {
+  // Tasks array
+  const tasksArray = [
+    {id: 1, title: "probably a very important task 1"},
+    {id: 2, title: "probably a very important task 2"},
+    {id: 3, title: "probably a very important task 3"}];
+  const [tasks, setTasks] = useState(tasksArray);
+
+  //helper function: finds id of given task in tasks array; if task is equal to the task given, return the id
+  const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
+
+  //handing drag so tasks are positioned appropriately according to where they are dragged to
+  const handleDragEnd = (event) => {
+    //active is event (task) being dragged
+    //over is event (task) to be replaced by active
+    const { active, over } = event;
+
+    //if dragged task returns to position, then do nothing
+    if (active.id === over.id) return;
+
+    setTasks((tasks) => {
+      const originalPos = getTaskPos(active.id); //id before task was dragged
+      const newPos = getTaskPos(over.id); //id after task is dragged
+
+      //updates array
+      return arrayMove(tasks, originalPos, newPos);
+    });
+  };
+
+  // make drag and droppable on mobile/keyboard
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  )
+  
   return (
     <div className="PageMenuAndContent">
         <Sidebar/>
@@ -31,12 +80,6 @@ export default function Goals() {
                 <p style={{margin: '0px'}}>description...</p>
                 <ProgressBar percentCompleted={20}/>
               </div>
-              {/* Goal 3 */}
-              {/* <div className="goal">
-                <h2>Goal3</h2>
-                <p>description...</p>
-                <ProgressBar percentCompleted={75}/>
-              </div> */}
           </div>
 
           {/* Tasks and Accomplishments */}
@@ -44,12 +87,10 @@ export default function Goals() {
             <div className='TasksSection'>
               <h2>Today's Tasks</h2>
               <hr></hr>
-              <div className='tasksList'>
-                <Task title='probably a very important task'/>
-                <Task title='probably a very important task'/>
-                <Task title='ahhh so many important tasks'/>
-                <Task title='probably a very important task'/>
-              </div>
+              {/* Drag and dropable task section */}
+              <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+                <TaskDraggable tasks={tasks}/>
+              </DndContext>
             </div>
             <div className='AccomplishmentsSection'>
               <h2>Accomplishments</h2>
