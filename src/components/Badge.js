@@ -1,6 +1,6 @@
 import React from 'react'
 import "../App.css";
-import penguinlogo from "../penguinlogo.png";
+// import penguinlogo from "../penguinlogo.png";
 
 export default function Badge(){
     return(
