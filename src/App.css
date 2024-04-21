@@ -225,17 +225,20 @@ input[type=text] {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
   margin: 15px auto 5px;
 }
 
 .goal{
   background-color: var(--darker-blue);
   color: silver;
-  width: 500px;
+  /* width: 500px; */
+  min-width: 330px;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 0px 15px 15px;
+  margin: 0px 5px;
+  flex-grow: 1;
 }
 
 .TasksAndAccomplishments{
@@ -248,11 +251,15 @@ input[type=text] {
 }
 
 .TasksSection{
+  /* background-color: #045394; */
   color: whitesmoke;
-  width: 520px;
+  /* width: 520px; */
+  min-width: 330px;
   height: auto;
   box-sizing: border-box;
   padding: 0px 15px;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .addTaskContainer{
@@ -295,6 +302,7 @@ input[type=text] {
 
 .addTaskContainer button:hover{
   background-color: var(--dark-orange);
+  cursor: pointer;
 }
 
 /* .tasksList{
@@ -315,6 +323,7 @@ input[type=text] {
   border-radius: 5px;
   box-sizing: border-box;
   padding: 15px;
+  box-shadow: 2px 2px var(--darkest-blue);
 
   display: flex;
   flex-direction: row;
@@ -323,16 +332,29 @@ input[type=text] {
   gap: 15px;
   margin: 8px 0px;
   touch-action: none;
+
+  cursor: grab;
+}
+
+.task:hover{
+  background-color: var(--darkest-blue);
+}
+
+.task:active{
+  cursor: grabbing;
 }
 
 .AccomplishmentsSection{
   /* background-color: var(--darkest-blue); */
   color: whitesmoke;
-  width: 520px;
+  /* width: 520px; */
+  min-width: 330px;
   height: auto;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 0px 15px;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .badgesList{

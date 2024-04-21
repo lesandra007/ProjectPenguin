@@ -45,8 +45,6 @@ def goals():
     response = get_badges()
     response = jsonify(response)
     response.headers.add('Access-Control-Allow-Origin', '*')
-    #response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-    #response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
 
 # define route to questions page
