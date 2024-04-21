@@ -239,6 +239,7 @@ input[type=text] {
   padding: 0px 15px 15px;
   margin: 0px 5px;
   flex-grow: 1;
+  flex-basis: 0;
 }
 
 .TasksAndAccomplishments{
