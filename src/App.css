@@ -344,6 +344,33 @@ input[type=text] {
   /* background-color: #f1821a; */
 }
 
+.badgeButton{
+  width: 115px;
+  height: 115px;
+  background-color: var(--darker-blue);
+  border-radius: 5px;
+  color: silver;
+  border-style: solid;
+  border-color: var(--darker-blue);
+  box-shadow: 2px 2px var(--darkest-blue);
+}
+
+.badgeButton .title{
+  /* background-color: #f1821a; */
+  color: gainsboro;
+  font-weight: bolder;
+  font-size:medium
+}
+
+.badgeButton hr{
+  border-color: var(--light-blue);
+}
+
+.badgeButton p{
+  /* background-color: #045394; */
+  margin-bottom: 0px;
+}
+
 /* Website Responsiveness */
 
 @media (max-width: 1100px) {
