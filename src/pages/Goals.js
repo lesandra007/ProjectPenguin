@@ -21,6 +21,30 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 
 
 export default function Goals() {
+  // Goals Database
+  const [userGoalsJson, setUserGoalsJson] = useState({
+    badgesCount: 0,
+    badges: [],
+    goals: [],
+    userTasks: []
+  });
+  // Fetch data from API
+  useEffect(() => {
+    fetch("/goals")
+    .then(response => response.json())
+    .then(
+      userGoalsJson => {
+        //userGoalsDb is database with users's goals, tasks, and badges information
+        setUserGoalsJson({
+          badgesCount: userGoalsJson.badgesCount,
+          badges: userGoalsJson.badges,
+          goals: userGoalsJson.goals,
+          userTasks: userGoalsJson.tasks
+        })
+      }
+    )
+  }, []);
+
   // Tasks array
   const tasksArray = [
     {id: 1, title: "probably a very important task 1"},
@@ -80,26 +104,6 @@ export default function Goals() {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   )
-
-  // ACCOMPLISHMENTS
-  const [userBadgesDb, setBadges] = useState({
-    count: 0,
-    badges: [],
-  });
-
-  useEffect(() => {
-    fetch("/goals")
-    .then(response => response.json())
-    .then(
-      userBadgesDb => {
-        //userBadgesDb is database with count and array of badges
-        setBadges({
-          count: userBadgesDb.count,
-          badges: userBadgesDb.badges,
-        })
-      }
-    )
-  }, [])
   
   return (
     <div className="PageMenuAndContent">
@@ -113,18 +117,21 @@ export default function Goals() {
 
           {/* Goal Items */}
           <div className="GoalItems">
-              {/* Goal 1 */}
-              <div className="goal">
-                <h2>Goal1</h2>
-                <p style={{margin: '0px'}}>description...</p>
-                <ProgressBar percentCompleted={50}/>
-              </div>
-              {/* Goal 2 */}
-              <div className="goal">
-                <h2>Goal2</h2>
-                <p style={{margin: '0px'}}>description...</p>
-                <ProgressBar percentCompleted={20}/>
-              </div>
+            {(typeof userGoalsJson.goals === 'undefined') ? ( 
+              // if badges array is undefined
+              <p>Loading...</p> 
+            ): (
+              //else display badges
+              // console.log("else display" + userBadgesDb.badges)
+              (userGoalsJson.goals).map((goals) => {
+                return (
+                  <div className="goal" key={goals.description}>
+                    <h2>{goals.title}</h2>
+                    <p style={{margin: '0px'}}># {goals.description}</p>
+                    <ProgressBar percentCompleted={goals.completed/goals.goal * 100}/>
+                  </div> )
+              })
+            )}
           </div>
 
           {/* Tasks and Accomplishments */}
@@ -153,13 +160,13 @@ export default function Goals() {
               <h2>Accomplishments</h2>
               <hr></hr>
               <div className='badgesList'>
-                  {(typeof userBadgesDb.badges === 'undefined') ? ( 
+                  {(typeof userGoalsJson.badges === 'undefined') ? ( 
                     // if badges array is undefined
                     <p>Loading...</p> 
                   ): (
                     //else display badges
                     // console.log("else display" + userBadgesDb.badges)
-                    (userBadgesDb.badges).toReversed().map((badges) => {
+                    (userGoalsJson.badges).toReversed().map((badges) => {
                       return <Badge key={badges.title} title={badges.title} description={badges.description}/>
                     })
                   )}

@@ -3,7 +3,7 @@ This is the Flask API backend server for Project Penguin. It returns data to the
 Run in terminal with: python app.py
 """
 from flask import Flask, request, jsonify
-from badges_service import get_badges
+from goals_service import get_goals
 
 # initiate a Flask application
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def home():
 # define route to goals page
 @app.route("/goals", methods=['GET'])
 def goals():
-    response = get_badges()
+    response = get_goals()
     response = jsonify(response)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
