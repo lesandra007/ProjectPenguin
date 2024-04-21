@@ -2,14 +2,15 @@
 This is the Flask API backend server for Project Penguin. It returns data to the frontend.
 Run in terminal with: python app.py
 """
-from flask import Flask
+from flask import Flask, request, jsonify
+from badges_service import get_badges
 
 # initiate a Flask application
 app = Flask(__name__)
 
 # example database
 db = {
-    'badges': {
+    'wows': {
         'woahhh': {
             'goals completed': 10
         },
@@ -39,9 +40,14 @@ def home():
     return "<h1>home</h1>"
 
 # define route to goals page
-@app.route("/goals")
+@app.route("/goals", methods=['GET'])
 def goals():
-    return "<h1>goals</h1>"
+    response = get_badges()
+    response = jsonify(response)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    #response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    #response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
 
 # define route to questions page
 @app.route("/questions")

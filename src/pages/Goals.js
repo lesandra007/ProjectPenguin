@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useState, useEffect }  from 'react'
 import "../App.css";
 import Sidebar from '../components/Sidebar';
 import Title from '../components/Title';
@@ -80,6 +80,26 @@ export default function Goals() {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   )
+
+  // ACCOMPLISHMENTS
+  const [userBadgesDb, setBadges] = useState({
+    count: 0,
+    badges: [],
+  });
+
+  useEffect(() => {
+    fetch("/goals")
+    .then(response => response.json())
+    .then(
+      userBadgesDb => {
+        //userBadgesDb is database with count and array of badges
+        setBadges({
+          count: userBadgesDb.count,
+          badges: userBadgesDb.badges,
+        })
+      }
+    )
+  }, [])
   
   return (
     <div className="PageMenuAndContent">
@@ -133,12 +153,16 @@ export default function Goals() {
               <h2>Accomplishments</h2>
               <hr></hr>
               <div className='badgesList'>
-                  <Badge/>
-                  <Badge/>
-                  <Badge/>
-                  <Badge/>
-                  <Badge/>
-                  <Badge/>
+                  {(typeof userBadgesDb.badges === 'undefined') ? ( 
+                    // if badges array is undefined
+                    <p>Loading...</p> 
+                  ): (
+                    //else display badges
+                    // console.log("else display" + userBadgesDb.badges)
+                    (userBadgesDb.badges).toReversed().map((badges) => {
+                      return <Badge key={badges.title} title={badges.title} description={badges.description}/>
+                    })
+                  )}
               </div>
             </div>
           </div>
