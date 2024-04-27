@@ -4,19 +4,19 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import penguinlogo from "../penguinlogo.png";
 
-export default function Login() {
+export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const onButtonClick = () => {
-        navigate('Home');
+        navigate('/Home');
     }
 
-    const redirectToSignUp = () => {
-        navigate('/Signup');
+    const redirectToLogin = () => {
+        navigate('/');
     }
-
+    
     return (
         <div className={'outerContainer'}>
             <div className='loginBox'>
@@ -27,7 +27,7 @@ export default function Login() {
                     <div>Project Penguin</div>
                 </div>
                 <div className={'greetingContainer'}>
-                    <div>Welcome back!</div>
+                    <div>Create Account</div>
                 </div>
                 <div classname={'inputContainer'} >
                     <input 
@@ -47,15 +47,14 @@ export default function Login() {
                     />
                 </div>
                 <div className={'buttonContainer'}>
-                    <input className={"button"} type="button" onClick={onButtonClick} value={"Log In"} />
+                    <input className={"button"} type="button" onClick={onButtonClick} value={"Sign Up"} />
                 </div>
                 <div style={{ height: '8px' }}></div>
                 <div style={{textAlign: 'center'}}>
-                    <a href="" onClick={redirectToSignUp} style={{display: 'inline-block'}}>Don't have an account? Sign Up Here!</a>
+                    <a href="" onClick={redirectToLogin} style={{display: 'inline-block'}}>Already have an account? Sign Up Here!</a>
                 </div>
             </div>
         </div>
     );
 
 }
-
