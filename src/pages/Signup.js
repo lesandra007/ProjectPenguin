@@ -7,10 +7,17 @@ import penguinlogo from "../penguinlogo.png";
 export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const onButtonClick = () => {
-        navigate('/Home');
+        // navigate('/Home');
+        if(email && password){
+            navigate('/Home');
+        }
+        else{
+            setErrorMessage('Please enter both email and password.');
+        }
     }
 
     const redirectToLogin = () => {
@@ -42,12 +49,17 @@ export default function Signup() {
                         value={password}
                         placeholder={"Password"}
                         onChange={(input) => setPassword(input.target.value)}
-                        type="text"
-                        classname="inputBox"
+                        type="password"
+                        className="passwordInput"
                     />
                 </div>
                 <div className={'buttonContainer'}>
                     <input className={"button"} type="button" onClick={onButtonClick} value={"Sign Up"} />
+                </div>
+                <div>
+                    {errorMessage && (
+                            <p style={{textAlign: 'center', color: 'red'}}>{errorMessage}</p>
+                    )}
                 </div>
                 <div style={{ height: '8px' }}></div>
                 <div style={{textAlign: 'center'}}>
