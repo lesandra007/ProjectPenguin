@@ -11,7 +11,6 @@ export default function Signup() {
     const navigate = useNavigate();
 
     const onButtonClick = () => {
-        // navigate('/Home');
         if(email && password){
             navigate('/Home');
         }
@@ -63,7 +62,7 @@ export default function Signup() {
                 </div>
                 <div style={{ height: '8px' }}></div>
                 <div style={{textAlign: 'center'}}>
-                    <a href="" onClick={redirectToLogin} style={{display: 'inline-block'}}>Already have an account? Sign Up Here!</a>
+                    <a href="" onClick={redirectToLogin} style={{display: 'inline-block'}}>Already have an account? Log In Here!</a>
                 </div>
             </div>
         </div>
