@@ -34,7 +34,7 @@ export default function Goals() {
     .then(response => response.json())
     .then(
       userGoalsJson => {
-        //userGoalsDb is database with users's goals, tasks, and badges information
+        //userGoalsJson is database with users's goals, tasks, and badges information
         setUserGoalsJson({
           badgesCount: userGoalsJson.badgesCount,
           badges: userGoalsJson.badges,
@@ -44,34 +44,60 @@ export default function Goals() {
       }
     )
   }, []);
-
+  // console.log("intialuserTasks=" + JSON.stringify(userGoalsJson.userTasks))
   // Tasks array
-  const tasksArray = [
-    {id: 1, title: "probably a very important task 1"},
-    {id: 2, title: "probably a very important task 2"},
-    {id: 3, title: "probably a very important task 3"}];
-  const [tasks, setTasks] = useState(tasksArray);
+  // const tasksArray = [
+  //   {id: 1, title: "probably a very important task 1"},
+  //   {id: 2, title: "probably a very important task 2"},
+  //   {id: 3, title: "probably a very important task 3"}];
+  // const [tasks, setTasks] = useState(tasksArray);
 
   // ADD TASK TO TASKS LIST
 
   //input field
   const [input, setInput] = useState("");
-  const handleSubmit = () => {
+  // const handleSubmit = () => {
+  //   //if no input, do nothing
+  //   if (!input) return;
+
+  //   addTask(input);
+    
+  //   //clear input field
+  //   setInput("");
+  // };
+
+  // //add a task to tasks array
+  // const addTask = title => {
+  //   setTasks(tasks => [...tasks, {id: tasks.length + 1, title}]);
+  // };
+
+  const [tasks, setTasks] = useState(userGoalsJson.userTasks)
+  const [isPending, setIsPending] = useState(false)
+
+  async function handleSubmit() {
     //if no input, do nothing
     if (!input) return;
+    console.log("input:" + input)
+    //diable add button
+    setIsPending(true)
 
-    addTask(input);
-    
+    //new data
+    const response = await fetch("/goals", {method: "POST"});
+    const jsonData = await response.json();
+    console.log("newTasks=" + JSON.stringify(jsonData))
+    setUserGoalsJson({
+      badgesCount: userGoalsJson.badgesCount,
+      badges: userGoalsJson.badges,
+      goals: userGoalsJson.goals,
+      userTasks: jsonData.newTasks
+    })
+
     //clear input field
     setInput("");
-  };
 
-  //add a task to tasks array
-  const addTask = title => {
-    setTasks(tasks => [...tasks, {id: tasks.length + 1, title}]);
-  };
-
-
+    //enable add button
+    setIsPending(false)
+  }
 
   // DROP AND DRAGGABLE TASKS LISTS
 
@@ -80,20 +106,20 @@ export default function Goals() {
 
   //handing drag so tasks are positioned appropriately according to where they are dragged to
   const handleDragEnd = (event) => {
-    //active is event (task) being dragged
-    //over is event (task) to be replaced by active
-    const { active, over } = event;
+    // //active is event (task) being dragged
+    // //over is event (task) to be replaced by active
+    // const { active, over } = event;
 
-    //if dragged task returns to position, then do nothing
-    if (active.id === over.id) return;
+    // //if dragged task returns to position, then do nothing
+    // if (active.id === over.id) return;
 
-    setTasks((tasks) => {
-      const originalPos = getTaskPos(active.id); //id before task was dragged
-      const newPos = getTaskPos(over.id); //id after task is dragged
+    // setTasks((tasks) => {
+    //   const originalPos = getTaskPos(active.id); //id before task was dragged
+    //   const newPos = getTaskPos(over.id); //id after task is dragged
 
-      //updates array
-      return arrayMove(tasks, originalPos, newPos);
-    });
+    //   //updates array
+    //   return arrayMove(tasks, originalPos, newPos);
+    // });
   };
 
   // make drag and droppable on mobile/keyboard
@@ -122,7 +148,7 @@ export default function Goals() {
               <p>Loading...</p> 
             ): (
               //else display badges
-              // console.log("else display" + userBadgesDb.badges)
+              // console.log(userGoalsJson)
               (userGoalsJson.goals).map((goals) => {
                 return (
                   <div className="goal" key={goals.description}>
@@ -140,20 +166,27 @@ export default function Goals() {
               <h2>Today's Tasks</h2>
               <hr></hr>
               {/* Add task */}
-              <div className='addTaskContainer'>
+              <form className='addTaskContainer'>
                 <div className='taskIcon'><ChecklistIcon/></div>
-                <input 
-                  type="text" 
-                  placeholder='Your Task'
-                  className="addTaskInput" 
-                  value = {input} 
-                  onChange={e => setInput(e.target.value)}/>
-                <button onClick={handleSubmit}>Add</button>
-              </div>
+                  <input 
+                    type="text" 
+                    placeholder='Your Task'
+                    className="addTaskInput" 
+                    name="taskToAdd"
+                    value = {input} 
+                    onChange={e => setInput(e.target.value)}/>
+                  {!isPending && <button type="submit" onClick={handleSubmit}>Add</button>}
+                  {isPending && <button disabled>Adding...</button>}
+              </form>
 
               {/* Drag and dropable task section */}
               <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-                <TaskDraggable tasks={tasks}/>
+                {(typeof userGoalsJson.userTasks === 'undefined') ? ( 
+                  // if badges array is undefined
+                  <p>Loading...</p> 
+                ): (
+                  <TaskDraggable tasks={userGoalsJson.userTasks}/>
+                )}
               </DndContext>
             </div>
             <div className='AccomplishmentsSection'>

@@ -4,9 +4,15 @@ Run in terminal with: python app.py
 """
 from flask import Flask, request, jsonify
 from goals_service import get_goals
+from goals_service import add_task
+from flask_cors import CORS
 
 # initiate a Flask application
 app = Flask(__name__)
+cors = CORS(app, origins=[
+    'http://localhost',
+    'http://localhost:3000',
+])
 
 # example database
 db = {
@@ -40,12 +46,16 @@ def home():
     return "<h1>home</h1>"
 
 # define route to goals page
-@app.route("/goals", methods=['GET'])
+@app.route("/goals", methods=['GET', 'POST'])
 def goals():
     response = get_goals()
-    response = jsonify(response)
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    #response = jsonify(response)
+    if request.method == 'GET':
+        return response
+    if request.method == 'POST':
+        task_title = request.form.get("taskToAdd")
+        return add_task(task_title)
+        
 
 # define route to questions page
 @app.route("/questions")

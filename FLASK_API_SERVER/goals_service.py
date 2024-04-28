@@ -14,17 +14,24 @@ goalsData = {
     ],
     'goals': [
         {'title': 'Hacker Alert', 'description': 'Complete 2 Hackings problems.', 'completed': 1, 'goal': 2},
-        {'title': 'Side Quests', 'description': 'Purchase 5 shop items.', 'completed': 1, 'goal': 5}
+        {'title': 'Side Quest', 'description': 'Purchase 5 shop items.', 'completed': 1, 'goal': 5}
     ],
     'tasks': [
-        {'id': 1,'title': 'Finish resume for *******'},
+        {'id': 1,'title': 'Finish resume for Project Penguin'},
         {'id': 2, 'title': 'Complete the Interview Question of the day'},
-        {'id': 3, 'title': 'Post about ***** program on Linkedin'}
+        {'id': 3, 'title': 'Post about Kickstarter program on Linkedin'},
     ]
 }
 
 def get_goals():
     return goalsData
 
-if __name__ == '__main__':
-    pp(get_goals())
+def add_task(title):
+    db = get_goals()
+    task_id = db['tasks'][-1]["id"] + 1
+    new_task = {'id': task_id, 'title': title}
+    db['tasks'].append(new_task)
+    return {'newTasks': db['tasks']}
+
+# if __name__ == '__main__':
+    # pp(get_goals())
