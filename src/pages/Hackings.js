@@ -1,5 +1,7 @@
 import React, {useRef, useState} from 'react'
 import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
+import Bottombar from '../components/Bottombar';
 import Title from '../components/Title';
 import "../App.css";
 import Editor from '@monaco-editor/react';
@@ -31,6 +33,7 @@ const runCode = async () => {
   return (
     <div className="PageMenuAndContent">
         <Sidebar/>
+        <Topbar/>
         <div className="PageContent">
           <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
             <Title title='Hackings'/>
@@ -74,6 +77,7 @@ const runCode = async () => {
           </section>
           </main>
         </div>
+        <Bottombar/>
       </div>
   );
 }

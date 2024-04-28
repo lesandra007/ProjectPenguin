@@ -1,6 +1,8 @@
 import React, { useState, useEffect }  from 'react'
 import "../App.css";
 import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
+import Bottombar from '../components/Bottombar';
 import Title from '../components/Title';
 import ProgressBar from '../components/ProgressBar';
 import { TaskDraggable } from "../components/TaskDraggable";
@@ -134,6 +136,7 @@ export default function Goals() {
   return (
     <div className="PageMenuAndContent">
         <Sidebar/>
+        <Topbar/>
         <div className="PageContent">
 
           {/* Title */}
@@ -207,6 +210,7 @@ export default function Goals() {
             </div>
           </div>
         </div>
+        <Bottombar/>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
+import Bottombar from '../components/Bottombar';
 import "../App.css";
 import Title from '../components/Title';
 
@@ -16,6 +18,7 @@ export default function Questions() {
   return (
     <div className="PageMenuAndContent">
         <Sidebar/>
+        <Topbar/>
         <div className="PageContent">
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
           <Title title='Questions'/>
@@ -38,6 +41,7 @@ export default function Questions() {
               </div>
           </div>
         </div>
+        <Bottombar/>
     </div>
   );
 }
