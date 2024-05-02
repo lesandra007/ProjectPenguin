@@ -1,8 +1,10 @@
 import React from 'react'
 import "../App.css";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Parse from 'parse/dist/parse.min.js';
 import penguinlogo from "../penguinlogo.png";
+import { PasswordRounded } from '@mui/icons-material';
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -13,6 +15,30 @@ export default function Signup() {
     const onButtonClick = () => {
         if(email && password){
             navigate('/Home');
+        }
+        else{
+            setErrorMessage('Please enter both email and password.');
+        }
+    }
+  
+    const handleSignUp = async () => {
+        if(email && password){
+            try {
+                 var user = new Parse.User();
+                 user.set("username", email);
+                 user.set("email", email);
+                 user.set("password", password);
+                 
+                user.signUp().then(function(user) {
+                    navigate('/Home');
+                   console.log('User created successful with username: ' + user.get("username"));
+                }).catch(function(error){
+                    setErrorMessage('Incorrect email or password format.');
+                });  
+            } catch (error) {
+                console.error('Error saving new User: ', error);
+                alert('Failed to add user. Please try again.');
+            }
         }
         else{
             setErrorMessage('Please enter both email and password.');
@@ -53,7 +79,7 @@ export default function Signup() {
                     />
                 </div>
                 <div className={'buttonContainer'}>
-                    <input className={"button"} type="button" onClick={onButtonClick} value={"Sign Up"} />
+                    <input className={"button"} type="button" onClick={handleSignUp} value={"Sign Up"} />
                 </div>
                 <div>
                     {errorMessage && (

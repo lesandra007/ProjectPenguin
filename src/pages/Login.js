@@ -2,6 +2,7 @@ import React from 'react'
 import "../App.css";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import Parse from 'parse/dist/parse.min.js';
 import penguinlogo from "../penguinlogo.png";
 
 export default function Login() {
@@ -13,6 +14,22 @@ export default function Login() {
     const onButtonClick = () => {
         if(email && password){
             navigate('/Home');
+        }
+        else{
+            setErrorMessage('Please enter both email and password.');
+        }
+    }
+
+    const handleLogin = () => {
+        if(email && password){
+            Parse.User.logIn(email, password).then(function(user) {
+               console.log('User created successful with name: ' + user.get("username"));
+               navigate('/Home');
+       }).catch(function(error){
+           console.log("Error: " + error.code + " " + error.message);
+           console.log("email: " + email + " password: " + password);
+           setErrorMessage('Incorrect email or password.');
+      });
         }
         else{
             setErrorMessage('Please enter both email and password.');
@@ -53,7 +70,7 @@ export default function Login() {
                     />
                 </div>
                 <div className={'buttonContainer'}>
-                    <input className={"button"} type="button" onClick={onButtonClick} value={"Log In"} />
+                    <input className={"button"} type="button" onClick={handleLogin} value={"Log In"} />
                 </div>
                 <div>
                     {errorMessage && (
