@@ -53,7 +53,7 @@ def goals():
     if request.method == 'GET':
         return response
     if request.method == 'POST':
-        task_title = request.form.get("taskToAdd")
+        task_title = request.form.get("title")
         return add_task(task_title)
         
 

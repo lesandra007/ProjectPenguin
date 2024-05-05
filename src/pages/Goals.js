@@ -80,19 +80,30 @@ export default function Goals() {
     //if no input, do nothing
     if (!input) return;
     console.log("input:" + input)
+    console.log("inputjson:" + JSON.stringify(input))
     //diable add button
     setIsPending(true)
 
-    //new data
-    const response = await fetch("/goals", {method: "POST"});
+    //form to pass data to flask backend
+    let data = new FormData()
+    data.append("title", input)
+    console.log(data.getAll("title"))
+
+    //pass form data to backend and retrieve results
+    const response = await fetch("/goals", {
+      method: "POST",
+      body: data
+    })
     const jsonData = await response.json();
-    console.log("newTasks=" + JSON.stringify(jsonData))
+
+    //set frontend variables
     setUserGoalsJson({
       badgesCount: userGoalsJson.badgesCount,
       badges: userGoalsJson.badges,
       goals: userGoalsJson.goals,
       userTasks: jsonData.newTasks
     })
+    console.log("tasks=" + JSON.stringify(userGoalsJson.userTasks))
 
     //clear input field
     setInput("");
@@ -104,7 +115,7 @@ export default function Goals() {
   // DROP AND DRAGGABLE TASKS LISTS
 
   //helper function: finds id of given task in tasks array; if task is equal to the task given, return the id
-  const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
+  const getTaskPos = (id) => userGoalsJson.userTasks.findIndex((task) => task.id === id);
 
   //handing drag so tasks are positioned appropriately according to where they are dragged to
   const handleDragEnd = (event) => {
@@ -169,7 +180,7 @@ export default function Goals() {
               <h2>Today's Tasks</h2>
               <hr></hr>
               {/* Add task */}
-              <form className='addTaskContainer'>
+              <form className='addTaskContainer' id="form">
                 <div className='taskIcon'><ChecklistIcon/></div>
                   <input 
                     type="text" 
@@ -178,7 +189,7 @@ export default function Goals() {
                     name="taskToAdd"
                     value = {input} 
                     onChange={e => setInput(e.target.value)}/>
-                  {!isPending && <button type="submit" onClick={handleSubmit}>Add</button>}
+                  {!isPending && <button type="button" onClick={handleSubmit}>Add</button>}
                   {isPending && <button disabled>Adding...</button>}
               </form>
 

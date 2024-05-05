@@ -13,7 +13,7 @@ goalsData = {
         {'title': 'Persistent Climber', 'description': 'acheived level 20'}
     ],
     'goals': [
-        {'title': 'Hacker Alert', 'description': 'Complete 2 Hackings problems.', 'completed': 1, 'goal': 2},
+        {'title': 'Hacker Alert', 'description': 'Complete 2 Hacking problems.', 'completed': 1, 'goal': 2},
         {'title': 'Side Quest', 'description': 'Purchase 5 shop items.', 'completed': 1, 'goal': 5}
     ],
     'tasks': [
