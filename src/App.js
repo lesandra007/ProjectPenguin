@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Parse from 'parse/dist/parse.min.js';
-import { UserComponent } from './UserComponent';
+// import { UserComponent } from './UserComponent';
 import Home from "./pages/Home";
 import Goals from "./pages/Goals";
 import Questions from "./pages/Questions";
