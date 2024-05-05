@@ -253,6 +253,7 @@ export async function handleDelete() {
     body: data
   })
   const jsonData = await response.json();
+  window.location.reload(true);
 
   //set frontend variables
   // setUserGoalsJson({

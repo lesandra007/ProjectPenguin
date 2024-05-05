@@ -28,7 +28,9 @@ def get_goals():
 
 def add_task(title):
     db = get_goals()
-    task_id = db['tasks'][-1]["id"] + 1
+    task_id = 1
+    if len(db["tasks"]) != 0:
+        task_id = db['tasks'][-1]["id"] + 1
     new_task = {'id': task_id, 'title': title}
     db['tasks'].append(new_task)
     return {'newTasks': db['tasks']}
