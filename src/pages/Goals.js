@@ -6,7 +6,7 @@ import Bottombar from '../components/Bottombar';
 import Title from '../components/Title';
 import ProgressBar from '../components/ProgressBar';
 import { TaskDraggable } from "../components/TaskDraggable";
-
+import {Task} from '../components/Task';
 import Badge from '../components/Badge';
 import {
   DndContext,
@@ -20,6 +20,7 @@ import {
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 import ChecklistIcon from '@mui/icons-material/Checklist';
+
 
 
 export default function Goals() {
@@ -58,21 +59,6 @@ export default function Goals() {
 
   //input field
   const [input, setInput] = useState("");
-  // const handleSubmit = () => {
-  //   //if no input, do nothing
-  //   if (!input) return;
-
-  //   addTask(input);
-    
-  //   //clear input field
-  //   setInput("");
-  // };
-
-  // //add a task to tasks array
-  // const addTask = title => {
-  //   setTasks(tasks => [...tasks, {id: tasks.length + 1, title}]);
-  // };
-
   const [tasks, setTasks] = useState(userGoalsJson.userTasks)
   const [isPending, setIsPending] = useState(false)
 
@@ -193,15 +179,27 @@ export default function Goals() {
                   {isPending && <button disabled>Adding...</button>}
               </form>
 
-              {/* Drag and dropable task section */}
-              <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+              {/* task section */}
+              {/* <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
                 {(typeof userGoalsJson.userTasks === 'undefined') ? ( 
-                  // if badges array is undefined
+                  // if tasks array is undefined
                   <p>Loading...</p> 
                 ): (
                   <TaskDraggable tasks={userGoalsJson.userTasks}/>
                 )}
-              </DndContext>
+              </DndContext> */}
+              <div>
+                {(typeof userGoalsJson.userTasks === 'undefined') ? ( 
+                  // if tasks array is undefined
+                  <p>Loading...</p> 
+                ): (
+                  //else display tasks
+                  (userGoalsJson.userTasks).map((task) => (
+                    <Task key={task.id} id={task.id} title={task.title} />
+                  ))
+                )}
+              </div>
+              
             </div>
             <div className='AccomplishmentsSection'>
               <h2>Accomplishments</h2>
@@ -224,4 +222,44 @@ export default function Goals() {
         <Bottombar/>
     </div>
   );
+}
+
+export let toDelete = [0,0];
+export function setToDelete(idNum) {
+  toDelete[0]++;
+  toDelete[1] = idNum;
+  console.log(toDelete);
+  if (toDelete[0] == 2){
+    handleDelete();
+    resetDelete();
+    console.log("reset: " + toDelete)
+  }
+}
+
+export function resetDelete(){
+  toDelete[0] = 0;
+  toDelete[1] = 0;
+}
+
+export async function handleDelete() {
+  //form to pass data to flask backend
+  let data = new FormData()
+  data.append("id", toDelete[1])
+  console.log(data.getAll("id"))
+
+  //pass form data to backend and retrieve results
+  const response = await fetch("/goals", {
+    method: "DELETE",
+    body: data
+  })
+  const jsonData = await response.json();
+
+  //set frontend variables
+  // setUserGoalsJson({
+  //   badgesCount: userGoalsJson.badgesCount,
+  //   badges: userGoalsJson.badges,
+  //   goals: userGoalsJson.goals,
+  //   userTasks: jsonData.newTasks
+  // })
+  // console.log("tasks=" + JSON.stringify(userGoalsJson.userTasks))
 }

@@ -363,16 +363,43 @@ input[type=text] {
   margin: 8px 0px;
   touch-action: none;
 
-  cursor: grab;
+  /* cursor: grab; */
 }
 
 .task:hover{
   background-color: var(--darkest-blue);
 }
 
-.task:active{
+/* .task:active{
   cursor: grabbing;
+} */
+
+.taskOptions{
+  cursor: pointer;
+  width: 20px;
+  height: 22px;
 }
+
+.delete{
+  position: relative;
+  border: 2px;
+  top: 0px;
+  left: -33px;
+  width: 80px;
+
+  display: flex;
+  flex-direction: row;
+  background-color: var(--light-blue);
+  color: snow;
+  padding: 5px;
+  gap: 5px;
+  border-radius: 5px;
+}
+
+.delete:hover{
+  color: var(--light-orange);
+}
+
 
 .AccomplishmentsSection{
   /* background-color: var(--darkest-blue); */

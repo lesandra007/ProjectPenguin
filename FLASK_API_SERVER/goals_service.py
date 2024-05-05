@@ -33,5 +33,12 @@ def add_task(title):
     db['tasks'].append(new_task)
     return {'newTasks': db['tasks']}
 
+def delete_task(id):
+    db = get_goals()
+    for index, task in enumerate(db['tasks']):
+        if task["id"] == int(id):
+            db['tasks'].remove(task)
+    return {'newTasks': db['tasks']}
+
 # if __name__ == '__main__':
     # pp(get_goals())

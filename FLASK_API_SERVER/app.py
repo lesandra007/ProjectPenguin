@@ -5,6 +5,7 @@ Run in terminal with: python app.py
 from flask import Flask, request, jsonify
 from goals_service import get_goals
 from goals_service import add_task
+from goals_service import delete_task
 from flask_cors import CORS
 
 # initiate a Flask application
@@ -46,7 +47,7 @@ def home():
     return "<h1>home</h1>"
 
 # define route to goals page
-@app.route("/goals", methods=['GET', 'POST'])
+@app.route("/goals", methods=['GET', 'POST', 'DELETE'])
 def goals():
     response = get_goals()
     #response = jsonify(response)
@@ -55,6 +56,10 @@ def goals():
     if request.method == 'POST':
         task_title = request.form.get("title")
         return add_task(task_title)
+    if request.method == 'DELETE':
+        task_id = request.form.get("id")
+        print(task_id)
+        return delete_task(task_id)
         
 
 # define route to questions page
