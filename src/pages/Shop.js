@@ -1,5 +1,7 @@
 import React, { useState, useEffect }  from 'react'
 import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
+import Bottombar from '../components/Bottombar';
 import Title from '../components/Title';
 import penguinlogo from "../penguinlogo.png";
 import blueHat from "../ShopImgs/blue_hat.jpg";
@@ -18,31 +20,78 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 
 
 export default function Shop() {
+  const listOfItems = [blueHat, browlineGlasses]
+  // Tokens Database
+  const [tokensJson, setTokensJson] = useState({
+    tokensCount: 0,
+    storeInventoryPrices: [],
+  });
+  // Fetch data from API
+  useEffect(() => {
+    fetch("/shop")
+    .then(response => response.json())
+    .then(
+      tokensJson => {
+        //tokensJson is database with user's tokens count and store inventory data
+        setTokensJson({
+          tokensCount: tokensJson.tokensCount,
+          storeInventoryPrices: tokensJson.storeInventoryPrices,
+        })
+      }
+    )
+  }, []);
 
   const[isPurchaseMenuOpen, setIsPurchaseMenuOpen] = useState(false);
-  const[itemToPurchase, setItemToPurchase] = useState("");
+  const[itemToPurchase, setItemToPurchase] = useState(["",""]);
+  const[priceToPurchase, setPriceToPurchase] = useState(0);
 
-  function handleSelect(item){
-    setItemToPurchase(item);
+  function getCostOfItem(type){
+    return tokensJson.storeInventoryPrices.find((item) => item.type === type).cost
+  }
+
+  function handleSelect(item, type){
+    setItemToPurchase([item,type]);
+    console.log("inventory: " + JSON.stringify(tokensJson.storeInventoryPrices))
+    setPriceToPurchase(getCostOfItem(type))
+    console.log("price: " + priceToPurchase)
     setIsPurchaseMenuOpen(true);
     console.log("item: " + itemToPurchase)
   }
 
-  function cancelPurchase(){
-    setItemToPurchase("");
+  function finishPurchase(){
+    setItemToPurchase(["",""]);
+    // setPriceToPurchase(0);
     setIsPurchaseMenuOpen(false);
-    console.log("item canceled: " + itemToPurchase)
+    console.log("item looked at: " + itemToPurchase[1])
   }
 
-  function handlePurchase(){
-    setItemToPurchase("");
-    setIsPurchaseMenuOpen(false);
-    console.log("item canceled: " + itemToPurchase)
+  async function handlePurchase(itemType){
+    if (itemToPurchase == ["",""]) return;
+    console.log("to purchase:" + itemToPurchase[1])
+
+    //form to pass data to flask backend
+    let data = new FormData()
+    data.append("type", itemType)
+    console.log(data.getAll("type"))
+
+    const response = await fetch("/shop", {
+      method: "DELETE",
+      body: data
+    })
+    const jsonData = await response.json();
+    console.log("updated tokens json count = " + JSON.stringify(jsonData.updatedCount))
+    //set frontend variables
+    setTokensJson({
+      tokensCount: jsonData.updatedCount,
+      storeInventoryPrices: tokensJson.storeInventoryPrices,
+    })
+    finishPurchase();
   }
 
   return (
     <div className="PageMenuAndContent">
         <Sidebar/>
+        <Topbar/>
         <div className="PageContent">
           <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
             <Title title='Shop'/>
@@ -52,28 +101,28 @@ export default function Shop() {
               <div className='shop'>
                 <div className='shopStatsHeader'>
                   <h2>SHOP</h2>
-                  <div className='shopTokens'><DiamondIcon/><div>1230</div></div>
+                  <div className='shopTokens'><DiamondIcon/><div>{tokensJson.tokensCount}</div></div>
                 </div>
                 <hr></hr>
                 <div className='shopList'>
-                  {/* <img src={blueHat} className='fitItem'/> */}
-                  <img src={brownLayer} className='fitItem' onClick={() => handleSelect(brownLayer)}/>
-                  <img src={greenBackpack} className='fitItem' onClick={() => handleSelect(greenBackpack)}/>
-                  <img src={greenSweater} className='fitItem' onClick={() => handleSelect(greenSweater)}/>
-                  <img src={purpleDress} className='fitItem' onClick={() => handleSelect(purpleDress)}/>
-                  <img src={browlineGlasses} className='fitItem' onClick={() => handleSelect(browlineGlasses)}/>
-                  <img src={skirt} className='fitItem' onClick={() => handleSelect(skirt)}/>
-                  <img src={pinkShades} className='fitItem' onClick={() => handleSelect(pinkShades)}/>
-                  <img src={blueHat} className='fitItem' onClick={() => handleSelect(blueHat)}/>
+                  <img src={brownLayer} className='fitItem' onClick={() => handleSelect(brownLayer,"outerlayer")}/>
+                  <img src={greenBackpack} className='fitItem' onClick={() => handleSelect(greenBackpack,"luggage")}/>
+                  <img src={greenSweater} className='fitItem' onClick={() => handleSelect(greenSweater,"outerlayer")}/>
+                  <img src={purpleDress} className='fitItem' onClick={() => handleSelect(purpleDress,"fullfit")}/>
+                  <img src={browlineGlasses} className='fitItem' onClick={() => handleSelect(browlineGlasses,"glasses")}/>
+                  <img src={skirt} className='fitItem' onClick={() => handleSelect(skirt,"bottoms")}/>
+                  <img src={pinkShades} className='fitItem' onClick={() => handleSelect(pinkShades,"glasses")}/>
+                  <img src={blueHat} className='fitItem' onClick={() => handleSelect(blueHat,"hats")}/>
                 </div>
                 {isPurchaseMenuOpen && 
                 <div>
                   <div className='purchaseBackground'/>
                   <div className='purchaseDialog'>
-                    <img src={itemToPurchase} className='fitItem'/>
+                    <img src={itemToPurchase[0]} className='fitItem'/>
                     <div className='purchaseButtons'>
-                      <button className="buyButton" onClick={handlePurchase}><DiamondIcon/><div>500</div></button>
-                      <button className="cancelBuyButton" onClick={cancelPurchase}>cancel</button>
+                      {(priceToPurchase <= tokensJson.tokensCount) && <button className="buyButton" onClick={() => handlePurchase(itemToPurchase[1])}><DiamondIcon/><div>{priceToPurchase}</div></button>}
+                      {(priceToPurchase > tokensJson.tokensCount) && <button className="buyButton"><DiamondIcon/><div>{priceToPurchase}</div></button>}
+                      <button className="cancelBuyButton" onClick={() => finishPurchase()}>cancel</button>
                     </div>
                   </div>
                 </div>} 
@@ -99,6 +148,7 @@ export default function Shop() {
             </div>
           </div>
         </div>
+        <Bottombar/>
     </div>
   );
 }

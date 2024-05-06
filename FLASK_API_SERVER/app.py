@@ -6,6 +6,9 @@ from flask import Flask, request, jsonify
 from goals_service import get_goals
 from goals_service import add_task
 from goals_service import delete_task
+from tokens_service import get_tokens
+from tokens_service import add_tokens
+from tokens_service import remove_tokens
 from flask_cors import CORS
 
 # initiate a Flask application
@@ -72,9 +75,18 @@ def hackings():
     return "<h1>hackings</h1>"
 
 # define route to shop page
-@app.route("/shop")
+@app.route("/shop", methods=['GET', 'POST', 'DELETE'])
 def shop():
-    return "<h1>shop</h1>"
+    response = get_tokens()
+    #response = jsonify(response)
+    if request.method == 'GET':
+        return response
+    if request.method == 'POST':
+        task_title = request.form.get("title")
+        return response
+    if request.method == 'DELETE':
+        item_type = request.form.get("type")
+        return remove_tokens(item_type)
 
 """ Run Flask Server """
 
