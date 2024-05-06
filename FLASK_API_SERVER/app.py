@@ -58,7 +58,6 @@ def goals():
         return add_task(task_title)
     if request.method == 'DELETE':
         task_id = request.form.get("id")
-        print(task_id)
         return delete_task(task_id)
         
 
