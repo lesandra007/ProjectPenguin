@@ -20,7 +20,6 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 
 
 export default function Shop() {
-  const listOfItems = [blueHat, browlineGlasses]
   // Tokens Database
   const [tokensJson, setTokensJson] = useState({
     tokensCount: 0,
@@ -66,7 +65,6 @@ export default function Shop() {
   }
 
   async function handlePurchase(itemType){
-    if (itemToPurchase == ["",""]) return;
     console.log("to purchase:" + itemToPurchase[1])
 
     //form to pass data to flask backend
@@ -105,20 +103,20 @@ export default function Shop() {
                 </div>
                 <hr></hr>
                 <div className='shopList'>
-                  <img src={brownLayer} className='fitItem' onClick={() => handleSelect(brownLayer,"outerlayer")}/>
-                  <img src={greenBackpack} className='fitItem' onClick={() => handleSelect(greenBackpack,"luggage")}/>
-                  <img src={greenSweater} className='fitItem' onClick={() => handleSelect(greenSweater,"outerlayer")}/>
-                  <img src={purpleDress} className='fitItem' onClick={() => handleSelect(purpleDress,"fullfit")}/>
-                  <img src={browlineGlasses} className='fitItem' onClick={() => handleSelect(browlineGlasses,"glasses")}/>
-                  <img src={skirt} className='fitItem' onClick={() => handleSelect(skirt,"bottoms")}/>
-                  <img src={pinkShades} className='fitItem' onClick={() => handleSelect(pinkShades,"glasses")}/>
-                  <img src={blueHat} className='fitItem' onClick={() => handleSelect(blueHat,"hats")}/>
+                  <img src={brownLayer}  alt="brown layer" className='fitItem' onClick={() => handleSelect(brownLayer,"outerlayer")}/>
+                  <img src={greenBackpack} alt="green blackpack" className='fitItem' onClick={() => handleSelect(greenBackpack,"luggage")}/>
+                  <img src={greenSweater} alt="green sweater" className='fitItem' onClick={() => handleSelect(greenSweater,"outerlayer")}/>
+                  <img src={purpleDress} alt="purple dress" className='fitItem' onClick={() => handleSelect(purpleDress,"fullfit")}/>
+                  <img src={browlineGlasses} alt="browline glasses" className='fitItem' onClick={() => handleSelect(browlineGlasses,"glasses")}/>
+                  <img src={skirt} alt="skirt" className='fitItem' onClick={() => handleSelect(skirt,"bottoms")}/>
+                  <img src={pinkShades} alt="pink shades" className='fitItem' onClick={() => handleSelect(pinkShades,"glasses")}/>
+                  <img src={blueHat} alt="blue hat" className='fitItem' onClick={() => handleSelect(blueHat,"hats")}/>
                 </div>
                 {isPurchaseMenuOpen && 
                 <div>
                   <div className='purchaseBackground'/>
                   <div className='purchaseDialog'>
-                    <img src={itemToPurchase[0]} className='fitItem'/>
+                    <img src={itemToPurchase[0]}  alt="selected item" className='fitItem'/>
                     <div className='purchaseButtons'>
                       {(priceToPurchase <= tokensJson.tokensCount) && <button className="buyButton" onClick={() => handlePurchase(itemToPurchase[1])}><DiamondIcon/><div>{priceToPurchase}</div></button>}
                       {(priceToPurchase > tokensJson.tokensCount) && <button className="buyButton"><DiamondIcon/><div>{priceToPurchase}</div></button>}
@@ -131,10 +129,10 @@ export default function Shop() {
                 <h2>WARDROBE</h2>
                 <hr></hr>
                 <div className='shopList'>
-                  <img src={blackSquareShades} className='fitItem'/>
-                  <img src={blueHoodie} className='fitItem'/>
-                  <img src={greenHat} className='fitItem'/>
-                  <img src={hair} className='fitItem'/>
+                  <img src={blackSquareShades} alt="black square shades" className='fitItem'/>
+                  <img src={blueHoodie} alt="blue hoodie" className='fitItem'/>
+                  <img src={greenHat} alt="green hat" className='fitItem'/>
+                  <img src={hair} alt="hair" className='fitItem'/>
                 </div>
               </div>
             </div>
@@ -143,8 +141,8 @@ export default function Shop() {
               <hr></hr>
               <div className='fits'>
                 <h2>PENGY FITS</h2>
-                <img src={penguinlogo} alt="logo"/>
               </div>
+              <img src={penguinlogo} alt="logo"/>
             </div>
           </div>
         </div>

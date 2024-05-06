@@ -5,20 +5,8 @@ import Topbar from '../components/Topbar';
 import Bottombar from '../components/Bottombar';
 import Title from '../components/Title';
 import ProgressBar from '../components/ProgressBar';
-import { TaskDraggable } from "../components/TaskDraggable";
 import {Task} from '../components/Task';
 import Badge from '../components/Badge';
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  TouchSensor,
-  closestCorners,
-} from "@dnd-kit/core";
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
-
 import ChecklistIcon from '@mui/icons-material/Checklist';
 
 
@@ -48,18 +36,11 @@ export default function Goals() {
     )
   }, []);
   // console.log("intialuserTasks=" + JSON.stringify(userGoalsJson.userTasks))
-  // Tasks array
-  // const tasksArray = [
-  //   {id: 1, title: "probably a very important task 1"},
-  //   {id: 2, title: "probably a very important task 2"},
-  //   {id: 3, title: "probably a very important task 3"}];
-  // const [tasks, setTasks] = useState(tasksArray);
 
   // ADD TASK TO TASKS LIST
 
   //input field
   const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState(userGoalsJson.userTasks)
   const [isPending, setIsPending] = useState(false)
 
   async function handleSubmit() {
@@ -97,38 +78,6 @@ export default function Goals() {
     //enable add button
     setIsPending(false)
   }
-
-  // DROP AND DRAGGABLE TASKS LISTS
-
-  //helper function: finds id of given task in tasks array; if task is equal to the task given, return the id
-  const getTaskPos = (id) => userGoalsJson.userTasks.findIndex((task) => task.id === id);
-
-  //handing drag so tasks are positioned appropriately according to where they are dragged to
-  const handleDragEnd = (event) => {
-    // //active is event (task) being dragged
-    // //over is event (task) to be replaced by active
-    // const { active, over } = event;
-
-    // //if dragged task returns to position, then do nothing
-    // if (active.id === over.id) return;
-
-    // setTasks((tasks) => {
-    //   const originalPos = getTaskPos(active.id); //id before task was dragged
-    //   const newPos = getTaskPos(over.id); //id after task is dragged
-
-    //   //updates array
-    //   return arrayMove(tasks, originalPos, newPos);
-    // });
-  };
-
-  // make drag and droppable on mobile/keyboard
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(TouchSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  )
   
   return (
     <div className="PageMenuAndContent">
@@ -179,15 +128,6 @@ export default function Goals() {
                   {isPending && <button disabled>Adding...</button>}
               </form>
 
-              {/* task section */}
-              {/* <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-                {(typeof userGoalsJson.userTasks === 'undefined') ? ( 
-                  // if tasks array is undefined
-                  <p>Loading...</p> 
-                ): (
-                  <TaskDraggable tasks={userGoalsJson.userTasks}/>
-                )}
-              </DndContext> */}
               <div>
                 {(typeof userGoalsJson.userTasks === 'undefined') ? ( 
                   // if tasks array is undefined
@@ -206,10 +146,10 @@ export default function Goals() {
               <hr></hr>
               <div className='badgesList'>
                   {(typeof userGoalsJson.badges === 'undefined') ? ( 
-                    // if badges array is undefined
+                    // if goals array is undefined
                     <p>Loading...</p> 
                   ): (
-                    //else display badges
+                    //else display goals
                     // console.log("else display" + userBadgesDb.badges)
                     (userGoalsJson.badges).toReversed().map((badges) => {
                       return <Badge key={badges.title} title={badges.title} description={badges.description}/>
@@ -229,7 +169,7 @@ export function setToDelete(idNum) {
   toDelete[0]++;
   toDelete[1] = idNum;
   console.log(toDelete);
-  if (toDelete[0] == 2){
+  if (toDelete[0] === 2){
     handleDelete();
     resetDelete();
     console.log("reset: " + toDelete)

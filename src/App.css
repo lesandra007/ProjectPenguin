@@ -470,7 +470,7 @@ input[type=text] {
   flex-direction: column;
   flex-grow: 3;
   flex-basis: 0;
-  gap: 20px;
+  gap: 10px;
 }
 
 .shop{
@@ -497,7 +497,7 @@ input[type=text] {
 .FitsSection{
   color: whitesmoke;
   /* width: 520px; */
-  min-width: 330px;
+  min-width: 420px;
   height: auto;
   box-sizing: border-box;
   padding: 0px 15px;
@@ -533,10 +533,10 @@ input[type=text] {
   padding: 0px 15px;
 }
 
-.fits img{ 
+.FitsSection img{ 
   /* background-color: #f1821a; */
-  height: 200px;
-  width: 300px;
+  height: 280px;
+  width: 420px;
 }
 
 .shopList{
