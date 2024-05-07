@@ -38,10 +38,18 @@ const theme = createTheme({
   });
 
 export default function Home() {
+    const[isTokenDialogOpen, setIsTokenDialogOpen] = useState(false);
+    const[rewardEarned, setRewardEarned] = useState(0);
+
+    function getRewardOfMethod(method){
+        return tokensJson.earnings.find((earning) => earning.method === method).reward
+      }
+
     // Tokens Database
     const [tokensJson, setTokensJson] = useState({
         tokensCount: 0,
         storeInventoryPrices: [],
+        earnings:[]
     });
     // Fetch data from API
     useEffect(() => {
@@ -51,8 +59,9 @@ export default function Home() {
         tokensJson => {
             //tokensJson is database with user's tokens count and store inventory data
             setTokensJson({
-            tokensCount: tokensJson.tokensCount,
-            storeInventoryPrices: tokensJson.storeInventoryPrices,
+                tokensCount: tokensJson.tokensCount,
+                storeInventoryPrices: tokensJson.storeInventoryPrices,
+                earnings: tokensJson.earnings
             })
         }
         )
@@ -83,6 +92,7 @@ export default function Home() {
     // console.log("intialstats=" + JSON.stringify(statsJson))
 
     async function handleAppSubmit(){
+        setRewardEarned(getRewardOfMethod("applications"))
         //form to pass data to flask backend
         let data = new FormData()
         data.append("method", "applications")
@@ -97,10 +107,10 @@ export default function Home() {
 
         //set frontend variables
         setStatsJson({
-        applications: jsonData.updatedCount,
-        interviews: statsJson.interviews,
-        questions: statsJson.questions,
-        hackings: statsJson.hackings
+            applications: jsonData.updatedCount,
+            interviews: statsJson.interviews,
+            questions: statsJson.questions,
+            hackings: statsJson.hackings
         })
         console.log("stats=" + JSON.stringify(statsJson))
 
@@ -109,12 +119,15 @@ export default function Home() {
         const jsonDataToken = await responseToken.json();
 
         setTokensJson({
-        tokensCount: jsonDataToken.tokensCount,
-        storeInventoryPrices: tokensJson.storeInventoryPrices,
+            tokensCount: jsonDataToken.tokensCount,
+            storeInventoryPrices: tokensJson.storeInventoryPrices,
+            earnings: tokensJson.earnings
         })
+        setIsTokenDialogOpen(true)
     }
 
     async function handleInterviewSubmit(){
+        setRewardEarned(getRewardOfMethod("interviews"))
         //form to pass data to flask backend
         let data = new FormData()
         data.append("method", "interviews")
@@ -141,10 +154,17 @@ export default function Home() {
         const jsonDataToken = await responseToken.json();
 
         setTokensJson({
-        tokensCount: jsonDataToken.tokensCount,
-        storeInventoryPrices: tokensJson.storeInventoryPrices,
+            tokensCount: jsonDataToken.tokensCount,
+            storeInventoryPrices: tokensJson.storeInventoryPrices,
+            earnings: tokensJson.earnings
         })
+        setIsTokenDialogOpen(true)
     }
+
+    function finishTransaction(){
+        setRewardEarned(0)
+        setIsTokenDialogOpen(false)
+      }
     return (
         <div className="PageMenuAndContent" /*style={{width: '100vw', height: '100vh', display: 'flex', flexDirection: 'row', backgroundColor: '#1F2947'}}*/>
             <Sidebar/>
@@ -233,9 +253,20 @@ export default function Home() {
                         </div>
                         
                     </div>
+                     
 
                 </div>
             </div>
+            {isTokenDialogOpen && 
+            <div>
+                <div className='purchaseBackground'/>
+                <div className='tokenDialog'>
+                    <DiamondIcon style={{color:'lightblue', fontSize:'100px'}}/>
+                    <h2 style={{color:'var(--dark-orange)',margin:'0px'}}>Congratulations!</h2>
+                    <p style={{color:'silver'}}>You earned {rewardEarned} tokens.</p>
+                    <button className="cancelBuyButton" onClick={() => finishTransaction()}>Hooray!</button>
+                </div>
+            </div>}
             <Bottombar/>
         </div>
     );

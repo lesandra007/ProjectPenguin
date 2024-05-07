@@ -666,6 +666,29 @@ input[type=text] {
   color:black;
 }
 
+.tokenDialog{
+  background-color: var(--darkest-blue);
+  border-radius: 10px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  box-sizing: border-box;
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.tokenDialog button:hover{
+  background-color: var(--dark-orange);
+}
 
 /* Website Responsiveness */
 
