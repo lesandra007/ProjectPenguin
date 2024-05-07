@@ -60,8 +60,6 @@ const Exercise5 = () => {
 
   const [activeRoute, setActiveRoute] = useState(""); //
 
-
-
   async function executeCode() {
     //const submissionData = await executeCodeJudge0(codeInput);
     //setCodeOutput(atob(submissionData.stdout));
