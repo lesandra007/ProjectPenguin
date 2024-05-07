@@ -9,6 +9,8 @@ from goals_service import delete_task
 from tokens_service import get_tokens
 from tokens_service import add_tokens
 from tokens_service import remove_tokens
+from stats_service import add_stats
+from stats_service import get_stats
 from flask_cors import CORS
 
 # initiate a Flask application
@@ -45,9 +47,15 @@ def login():
     return "<h1>log in</h1>"
 
 # define route to home page
-@app.route("/home")
+@app.route("/home", methods=['GET', 'POST'])
 def home():
-    return "<h1>home</h1>"
+    response = get_stats()
+    #response = jsonify(response)
+    if request.method == 'GET':
+        return response
+    if request.method == 'POST':
+        method = request.form.get("method")
+        return add_stats(method)
 
 # define route to goals page
 @app.route("/goals", methods=['GET', 'POST', 'DELETE'])
