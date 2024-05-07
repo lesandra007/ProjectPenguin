@@ -456,6 +456,7 @@ input[type=text] {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+  margin-right: 20px;
 
 }
 
@@ -494,15 +495,28 @@ input[type=text] {
   padding: 0px 15px;
 }
 
-.FitsSection{
-  color: whitesmoke;
+.wardrobeHome{
+  /* background-color: #045394; */
+  font-size: small;
   /* width: 520px; */
-  min-width: 420px;
+  min-width: 330px;
   height: auto;
   box-sizing: border-box;
   padding: 0px 15px;
+}
+
+.FitsSection{
+  color: whitesmoke;
+  /* width: 520px; */
+  min-width: 330px;
+  max-width: 500px;
+  height: auto;
+  box-sizing: border-box;
+  padding: 0px 30px;
   flex-grow: 2;
   flex-basis: 0;
+  background-color: var(--darker-blue);
+  border-radius: 10px;
 }
 
 .shopStatsHeader{
@@ -630,6 +644,26 @@ input[type=text] {
 
 .purchaseButtons button:hover{
   background-color: var(--dark-orange);
+}
+
+.statsButton{
+  box-sizing: border-box;
+  /* padding: 10px;  */
+  width: 145px;
+  height: 40px;
+  font-size: 16px; 
+  /* background-color: var(--dark-orange); */
+  background-color: var(--base-blue);
+  color: whitesmoke; 
+  border: inset; 
+  border-radius: 5px;
+  cursor: pointer; 
+  box-shadow: #000;
+}
+
+.statsButton:hover{
+  background-color: var(--dark-orange);
+  color:black;
 }
 
 
