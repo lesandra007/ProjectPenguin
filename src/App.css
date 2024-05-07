@@ -880,3 +880,60 @@ textarea {
   cursor: pointer;
   display: flex;
 }
+
+ /* Hackings page */
+ .code-nav {
+  display: flex;
+  flex-direction: column; /* Arrange buttons vertically */
+}
+
+.nav-button {
+  display: block; /* Display as block to make them vertical */
+  padding: 10px;
+  width: 90%;
+  margin: 8px 0; /* Add vertical spacing between buttons */
+  background-color: var(--darker-blue);
+  text-align: left;
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.circle-background {
+  fill: none;
+  stroke: #ddd;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: var(--darker-blue);
+}
+
+.left-column {
+  float: left;
+  width: 50%;
+  color: #FFFF;
+}
+
+/* Styling for the hacking progress box */
+.hacking-progress-box {
+  background-color: var(--base);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+
+/* Styling for the coding exercise box */
+.coding-exercise-box {
+  background-color: var(--darker-blue);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+/* Styling for the title within the coding exercise box */
+.coding-exercise-title {
+  font-size: 3vh;
+  color: #FFFFFF;
+  font-weight: bold;
+}
