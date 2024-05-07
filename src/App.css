@@ -510,7 +510,7 @@ input[type=text] {
   /* width: 520px; */
   min-width: 330px;
   max-width: 500px;
-  height: auto;
+  /* height: fit-content; */
   box-sizing: border-box;
   padding: 0px 30px;
   flex-grow: 2;

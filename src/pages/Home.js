@@ -43,7 +43,7 @@ export default function Home() {
             <Topbar/>
             <div className="PageContent" /*style={{display: 'flex', flexDirection: 'column', alignItems: 'center', flex: '1'}}*/>
                 <Title title="Home"/>
-                <div className="ShopSections" style={{flexWrap:'wrap-reverse', gap: '20px', marginLeft:'20px'}}/*style={itemListStyle}*/>
+                <div className="ShopSections" style={{flexWrap:'wrap-reverse', gap: '20px', marginLeft:'20px', alignItems:'flex-end'}}/*style={itemListStyle}*/>
 
                     <div style={{display: 'flex', flexDirection: 'column', gap: '10px', flexBasis:'0', flexGrow:'3', minWidth:'330px'}}>
                         {/* PENGY STATS BOX */}
@@ -55,7 +55,7 @@ export default function Home() {
                             </div> */}
                             <h2 style={{color: 'whitesmoke'}}>PENGY STATS</h2>
                             <hr style={{width: '100%'}}></hr>
-                            <div style={{display:'flex', flexDirection:'row', flexWrap:'wrap', gap:'10px'}}>
+                            <div className="statBoxes" style={{display:'flex', flexDirection:'row', flexWrap:'wrap', gap:'10px'}}>
                                 <div style={{ backgroundColor:'var(--darker-blue)', borderRadius: '10px',display:'flex', flexDirection: 'column', 
                                             alignItems:'center', width:'200px', gap: '25px', boxSizing:'border-box', padding:'20px'}}>
                                     <PengyStats title="Applications" number="28"/>
@@ -77,34 +77,13 @@ export default function Home() {
                                     <Button type="button" href="/hackings" style={{color:'whitesmoke', border:'inset', padding: '5px 12px'}}>See More</Button>
                                 </div>
                             </div>
-                            
-                            
-                            
                         </div>
-
-                        {/* <div style={{ backgroundColor:'var(--darker-blue)', borderRadius: '10px', boxSizing: 'border-box', padding: '30px'}}>
-                            <div style={{width: '100%', display: 'flex', flexDirection: 'column'}}>
-                                <div style={{ fontSize: '5vh', color: '#FFFFFF', fontWeight: 'bold'}}>
-                                    PENGY'S WARDROBE
-                                </div>
-                                <h2 style={{color: 'var(--dark-orange', fontSize: 'larger'}}>PENGY WARDROBE</h2>
-                                <hr style={{width: '100%'}}></hr>
-                                <div style={{marginTop: '10px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
-                                    <ShopItem />
-                                    <ShopItem />
-                                    <ShopItem />
-                                    <ShopItem />
-                                    <ShopItem />
-                                    <ShopItem />
-                                </div>
-                            </div>
-                        </div> */}
                         <div className='wardrobeHome'>
                             <div style={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
                                 <h2 style={{color:'var(--dark-orange)'}}>WARDROBE</h2>
                                 <ThemeProvider theme={theme}>
                                     <Button variant="contained" color="orange" href="/shop" style={{height:'38px', border:'inset'}}>
-                                        EXPLORE MORE
+                                        EXPLORE SHOP
                                     </Button>
                                 </ThemeProvider>
                             </div>
@@ -120,7 +99,7 @@ export default function Home() {
                     </div>
                     
                     {/* PENGY Character BOX */}
-                    <div className='statsBox' style={{backgroundColor:'var(--darker-blue)', borderRadius: '10px', boxSizing: 'border-box', padding: '5px 30px 20px', flexBasis:'0', flexGrow:'2', minWidth:'330px'}}>
+                    <div style={{backgroundColor:'var(--darker-blue)', borderRadius: '10px', boxSizing: 'border-box', padding: '5px 30px 20px', flexBasis:'0', flexGrow:'2', minWidth:'330px', maxWidth: '500px', height: 'fit-content'}}>
                         <h2 style={{color: 'whitesmoke'}}>PENGY</h2>
                         <hr style={{width: '100%'}}></hr>
                         <div style={{width: '100%', display: 'flex', flexDirection: 'column'}}>
